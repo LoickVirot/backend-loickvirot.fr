@@ -77,6 +77,6 @@
     ]
   },
   "autoload": {
-    "psr-4": {"Plugin\\": "web/app/plugins/"}
+    "psr-4": {"Plugin\\": "web/app/mu-plugins/"}
   }
 }
