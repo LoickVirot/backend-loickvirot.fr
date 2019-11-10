@@ -8,8 +8,6 @@
 
 namespace Plugin\LV\Portfolio;
 
-use Plugin\LV\Portfolio\Dao\ProjectDAO;
-
 class Index
 {
 
