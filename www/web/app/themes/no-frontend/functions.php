@@ -1,4 +1,4 @@
 <?php
 
-add_theme_support( 'post-thumbnails', array( 'post', 'lv_project' ));
+add_theme_support( 'post-thumbnails', array( 'post', 'project' ));
 

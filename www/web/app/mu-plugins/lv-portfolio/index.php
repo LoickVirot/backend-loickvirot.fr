@@ -11,6 +11,8 @@ namespace Plugin\LV\Portfolio;
 class Index
 {
 
+    public const PROJECT_TYPE = "project";
+
     /**
      * Index constructor.
      */
@@ -46,7 +48,7 @@ class Index
             'hierarchical' => true,
             'description' => 'Projects filterable by genre',
             'supports' => array('title', 'excerpt', 'editor', 'thumbnail'),
-            'taxonomies' => array('genres'),
+            'taxonomies' => array('project_type'),
             'public' => true,
             'show_ui' => true,
             'show_in_menu' => true,
@@ -65,14 +67,15 @@ class Index
             'rest_controller_class' => 'WP_REST_Posts_Controller',
         );
 
-        register_post_type('lv_project', $args);
+        add_filter('use_block_editor_for_post_type', '__return_false', 10);
+
+        register_post_type(self::PROJECT_TYPE, $args);
 
     }
 
-
     public static function api_register_lv_project()
     {
-        register_rest_field('lv_project', 'thumbnail', array(
+        register_rest_field(self::PROJECT_TYPE, 'thumbnail', array(
             'get_callback' => function ($data) {
                 return get_the_post_thumbnail_url($data['id']);
             }
@@ -82,14 +85,14 @@ class Index
     public static function genres_taxonomy()
     {
         register_taxonomy(
-            'genres',
-            'lv_project',
+            'project_type',
+            self::PROJECT_TYPE,
             array(
-                'hierarchical' => true,
-                'label' => 'Genres',
+                'hierarchical' => false,
+                'label' => 'Projects type',
                 'query_var' => true,
                 'rewrite' => array(
-                    'slug' => 'genre',
+                    'slug' => 'project-type',
                     'with_front' => false
                 )
             )
