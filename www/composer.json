@@ -51,11 +51,22 @@
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
-      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
-      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+      "web/app/mu-plugins/{$name}/": [
+        "type:wordpress-muplugin"
+      ],
+      "web/app/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ],
+      "web/app/themes/{$name}/": [
+        "type:wordpress-theme"
+      ]
     },
-    "wordpress-install-dir": "web/wp"
+    "wordpress-install-dir": "web/wp",
+    "merge-plugin": {
+      "require": [
+        "web/app/plugins/lv-portfolio/composer.json"
+      ]
+    }
   },
   "scripts": {
     "post-root-package-install": [
@@ -64,5 +75,8 @@
     "test": [
       "phpcs"
     ]
+  },
+  "autoload": {
+    "psr-4": {"Plugin\\": "web/app/plugins/"}
   }
 }
