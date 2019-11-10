@@ -14,11 +14,15 @@ class ProjectDAO
     public static function getProjects()
     {
         global $wpdb;
-        return $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE post_type LIKE 'lv_project'");
+        return $wpdb->get_results(
+            "SELECT * FROM $wpdb->posts WHERE post_type LIKE 'lv_project' AND post_status = 'publish'"
+        );
     }
 
     public static function getProject($id) {
         global $wpdb;
-        return $wpdb->get_results("SELECT * FROM $wpdb->posts WHERE post_type LIKE 'lv_project' AND ID = $id");
+        return $wpdb->get_results(
+            "SELECT * FROM $wpdb->posts WHERE post_type LIKE 'lv_project' AND ID = $id"
+        );
     }
 }

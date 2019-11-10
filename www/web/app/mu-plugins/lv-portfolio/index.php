@@ -45,7 +45,7 @@ class Index
             'labels' => $labels,
             'hierarchical' => true,
             'description' => 'Projects filterable by genre',
-            'supports' => array('title', 'editor', 'thumbnail', 'trackbacks', 'custom-fields', 'comments', 'revisions', 'page-attributes'),
+            'supports' => array('title', 'excerpt', 'editor', 'thumbnail'),
             'taxonomies' => array('genres'),
             'public' => true,
             'show_ui' => true,
@@ -63,6 +63,7 @@ class Index
         );
 
         register_post_type('lv_project', $args);
+
     }
 
 
