@@ -80,6 +80,12 @@ class Index
                 return get_the_post_thumbnail_url($data['id']);
             }
         ));
+
+        register_rest_field(self::PROJECT_TYPE, 'project-type', array(
+            'get_callback' => function ($data) {
+                return get_the_terms($data['id'], 'project_type');
+            }
+        ));
     }
 
     public static function genres_taxonomy()
