@@ -20,8 +20,10 @@ class Index
     {
         add_action('init', array(__CLASS__, 'register_lv_project'));
         add_action('init', array(__CLASS__, 'genres_taxonomy'));
+
         add_action('rest_api_init', array(__CLASS__, 'api_register_lv_project'));
     }
+
 
     public static function register_lv_project()
     {
@@ -59,7 +61,10 @@ class Index
             'query_var' => true,
             'can_export' => true,
             'rewrite' => true,
-            'capability_type' => 'post'
+            'capability_type' => 'post',
+            'show_in_rest'       => true,
+            'rest_base'          => 'project',
+            'rest_controller_class' => 'WP_REST_Posts_Controller',
         );
 
         register_post_type('lv_project', $args);
@@ -69,19 +74,10 @@ class Index
 
     public static function api_register_lv_project()
     {
-
-        register_rest_route('lvportfolio/v1', '/project/(?P<id>\d+)', array(
-            'methods' => 'GET',
-            'callback' => function($data) {
-                return ProjectDAO::getProject($data['id']);
-            },
-        ));
-
-        register_rest_route('lvportfolio/v1', '/project', array(
-            'methods' => 'GET',
-            'callback' => function() {
-                return ProjectDAO::getProjects();
-            },
+        register_rest_field('lv_project', 'thumbnail', array(
+            'get_callback' => function ($data) {
+                return get_the_post_thumbnail_url($data['id']);
+            }
         ));
     }
 
