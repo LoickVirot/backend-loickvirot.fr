@@ -1,0 +1,11 @@
+{
+    "name": "lv/portfolio",
+    "description": "Portfolio wordpress plugin",
+    "authors": [
+        {
+            "name": "Loick Virot",
+            "email": "lvirot@pm.me"
+        }
+    ],
+    "require": {}
+}
