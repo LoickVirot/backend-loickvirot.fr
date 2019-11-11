@@ -8,10 +8,10 @@ services:
         volumes:
             - "./.data/db:/var/lib/mysql"
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: wordpress
-            MYSQL_USER: wordpress
-            MYSQL_PASSWORD: wordpress
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     php:
         build: php-fpm
         links:
@@ -23,7 +23,7 @@ services:
     nginx:
         build: nginx
         ports:
-            - 8000:80
+            - ${PORT}:80
         links:
             - php
         depends_on:
