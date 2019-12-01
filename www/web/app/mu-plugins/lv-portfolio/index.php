@@ -22,6 +22,8 @@ class Index
         add_action('init', array(__CLASS__, 'genres_taxonomy'));
 
         add_action('rest_api_init', array(__CLASS__, 'api_register_lv_project'));
+
+        add_filter('the_excerpt', array(__CLASS__, 'filter_excerpt'));
     }
 
 
@@ -103,6 +105,11 @@ class Index
                 )
             )
         );
+    }
+
+    public static function filter_excerpt($data) {
+        $data = strip_tags($data);
+        return $data;
     }
 
 }
