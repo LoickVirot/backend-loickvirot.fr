@@ -14,7 +14,6 @@ class Index
 
     public static function run() {
 
-        SiteIcon::run();
         Menus::run();
     }
 }
