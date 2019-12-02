@@ -1,0 +1,11 @@
+{
+    "name": "lv/rest-utils",
+    "description": "REST API utils wordpress plugin",
+    "authors": [
+        {
+            "name": "Loick Virot",
+            "email": "lvirot@pm.me"
+        }
+    ],
+    "require": {}
+}
