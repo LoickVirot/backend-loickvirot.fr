@@ -1,0 +1,33 @@
+# docker-compose.yml
+version: '3'
+services:
+    db:
+        image: mysql:5.7
+        ports:
+            - 3317:3306
+        volumes:
+            - "./.data/db:/var/lib/mysql"
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    php:
+        build: php-fpm
+        links:
+            - db:mysqldb
+        volumes:
+            - ./www:/var/www/app
+        ports:
+            - 9000:9000
+    nginx:
+        build: nginx
+        ports:
+            - ${PORT}:80
+        links:
+            - php
+        depends_on:
+            - php
+        volumes:
+            - ./logs/nginx/:/var/log/nginx
+            - ./www:/var/www/app
